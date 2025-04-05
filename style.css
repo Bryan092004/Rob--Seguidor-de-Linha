@@ -1,0 +1,182 @@
+/* Reset de estilos */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-image: url("imagens/fundo.jpg");
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    color: #333;
+    text-align: center;
+}
+
+header {
+    background-color: #007BFF;
+    color: white;
+    padding: 20px;
+}
+
+nav ul {
+    list-style: none;
+    padding: 10px;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+section {
+    padding: 20px;
+    margin: 40px auto;
+    max-width: 900px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+}
+
+section img {
+    max-width: 100%;
+    margin-top: 20px;
+    border-radius: 8px;
+}
+
+footer {
+    background: #007BFF;
+    color: white;
+    padding: 10px;
+    margin-top: 40px;
+}
+
+/* Carrossel */
+.carrossel {
+    position: relative;
+    max-width: 100%;
+    margin: 20px auto;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.carrossel-imagens {
+    display: flex;
+    transition: transform 0.5s ease;
+}
+
+.item {
+    display: none;
+    text-align: center;
+    padding: 10px;
+}
+
+.item img {
+    width: 100%;
+    max-width: 450px;
+    margin: 0 auto;
+    border-radius: 8px;
+}
+
+.item .descricao {
+    margin-top: 10px;
+    font-size: 15px;
+    color: #555;
+    max-width: 450px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Botões do carrossel */
+button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px;
+    font-size: 24px;
+    cursor: pointer;
+    border-radius: 50%;
+    z-index: 10;
+}
+
+.prev {
+    left: 10px;
+}
+
+.next {
+    right: 10px;
+}
+
+button:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+.codigo-container .codigo {
+    background-color: #000;     /* Fundo preto */
+    padding: 20px;              /* Espaço interno */
+    border-radius: 5px;         /* Cantos arredondados */
+    text-align: left;           /* Texto à esquerda */
+    margin: 20px auto 20px 0;   /* Joga o bloco pro lado esquerdo, mas ainda com margem */
+    max-width: 100%;            /* Ocupa toda a largura disponível dentro da margem */
+}
+.codigo-bloco {
+    background-color: #000;
+    padding: 30px;
+    margin: 30px auto;
+    border-radius: 10px;
+    max-width: 900px;
+    overflow-x: auto;
+    text-align: left;
+    position: relative;
+}
+
+/* Estilo do texto do código */
+.codigo-bloco pre {
+    color: #259616; /* Letras brancas dentro do código */
+    background: transparent;
+    margin: 0;
+    white-space: pre-wrap; /* Permite quebra de linha sem perder formatação */
+    font-family: 'Courier New', Courier, monospace;
+}
+
+/* Estilo do botão */
+.botao-download {
+    display: block;
+    margin: 20px auto 0; /* Centraliza horizontalmente */
+    padding: 10px 20px;
+    background-color: #1e90ff;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: transform 0.2s ease, background-color 0.3s ease;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0,0,0,0.4);
+}
+
+/* Animação no hover */
+.botao-download:hover {
+    background-color: #3ea0ff;
+    transform: scale(1.05);
+}
+
+
+  
+
+
+
+  
+  
