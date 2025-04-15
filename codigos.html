@@ -1,47 +1,237 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Códigos do Projeto</title>
-  <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projeto Carrinho Seguidor de Linha</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header>
-    <h1>Códigos do Projeto</h1>
-    <nav>
-      <ul>
-        <li><a href="index.html">Início</a></li>
-      </ul>
-    </nav>
-  </header>
+    <header>
+        <h1>Projeto Robô Seguidor de Linha</h1>
+        <nav>
+            <ul>
+                <li><a href="#descricao">Descrição</a></li>
+                <li><a href="#componentes">Componentes</a></li>
+                <li><a href="#codigo">Código</a></li>
+            </ul>
+        </nav>
+    </header>
 
-  <section id="codigo">
-    <h2>Seguidor de Linha (Modo Automático)</h2>
-    <pre><code>
-#include &lt;AFMotor.h&gt;
+    <section id="descricao">
 
+        <h2>Descrição do Projeto</h2>
+        <br>
+        <p>Este projeto tem como objetivo o desenvolvimento de um carrinho autônomo capaz de seguir trajetos definidos por uma linha no solo, utilizando sensores infravermelhos. Além disso, o sistema permite o controle manual por meio de um aplicativo via Bluetooth, transformando o celular em um controle remoto.</p>
+
+        <p>Ambas as funcionalidades (modo automático e modo manual) estão implementadas, mas operam de forma independente. Para alternar entre os modos, é necessário carregar manualmente o código correspondente no Arduino, por meio da conexão com o computador.</p>
+        <br>
+        <h3>Objetivos</h3>
+        <br>
+        <ul>
+            <li>Criar um robô carrinho utilizando a placa Arduino como plataforma principal.</li>
+            <li>Aplicar lógica de programação com a linguagem C.</li>
+            <li>Integrar componentes eletrônicos como motores, sensores e módulos de controle.</li>
+            <li>Exercitar o raciocínio lógico e a solução de problemas práticos.</li>
+            <li>Demonstrar, na prática, conceitos básicos de automação e robótica.</li>
+        </ul>
+        <br>
+        <h3>Discussão das Referências</h3>
+        <br>
+        <p>As referências utilizadas durante o projeto foram fundamentais para compreender e aplicar os conhecimentos necessários à criação do robô carrinho com Arduino. A partir delas, foi possível aprender desde os fundamentos da programação em C até o funcionamento de componentes como motores, sensores e a própria placa Arduino.</p>
+        
+        <p>Materiais como manuais, tutoriais e artigos destacaram o Arduino como uma ferramenta acessível e poderosa para iniciantes em robótica. Além dos aspectos técnicos, as fontes consultadas contribuíram para boas práticas de montagem, lógica de controle e resolução de problemas comuns.</p>
+        
+        <p>Essas referências serviram como guias teóricos e práticos ao longo do projeto, tornando o processo de aprendizado mais claro, eficiente e envolvente. Elas foram essenciais tanto para resolver dúvidas quanto para inspirar melhorias no sistema.</p>
+        <br>
+        <h3>Metodologia</h3>
+        <br>
+        <p>O desenvolvimento foi dividido em duas etapas principais: controle remoto via Bluetooth e seguidor de linha.</p>
+
+        <p>Em ambas as versões, utilizou-se a placa Arduino UNO com a shield L293D (AFMotor) para controle de quatro motores DC.</p>
+
+        <p>Na versão Bluetooth, o módulo HC-05 foi responsável por receber comandos do celular. O carrinho reconhece letras específicas ('F', 'B', 'L', 'R') para movimentar-se, e conta com um sensor ultrassônico (HC-SR04) que impede avanços em caso de obstáculos a menos de 10 cm.</p>
+
+        <p>Na versão seguidor de linha, quatro sensores infravermelhos conectados às portas analógicas do Arduino detectam a linha preta sobre fundo branco. O código ajusta a movimentação conforme a posição da linha, permitindo que o robô siga a trajetória com precisão.</p>
+
+        <p>A lógica de controle dos modos foi implementada na IDE do Arduino, utilizando as bibliotecas <code>AFMotor.h</code> e <code>HCSR04.h</code>. Vários testes foram feitos para calibrar velocidade, resposta dos sensores e comportamento dos motores.</p>
+
+        <img src="imagens/Robo.jpg" alt="Carrinho Seguidor de Linha">
+    </section>
+
+    <section id="componentes">
+        <h2>Componentes do Projeto</h2>
+        <div class="carrossel">
+            <div class="carrossel-imagens">
+                <div class="item">
+                    <img src="imagens/arduino.jpg" alt="Arduino Uno">
+                    <p class="descricao"><strong>Arduino Uno</strong> — Microcontrolador ATmega328P responsável por processar os dados dos sensores e controlar os atuadores do carrinho.</p>
+                </div>
+                <div class="item">
+                    <img src="imagens/sensorinfravermelho.jpg" alt="Sensor de Linha">
+                    <p class="descricao"><strong>Sensores de Linha</strong> — Dispositivos ópticos que detectam contraste (geralmente preto/branco) para permitir o seguimento preciso da trajetória.</p>
+                </div>
+                <div class="item">
+                    <img src="imagens/motorshield.jpg" alt="Shield L293D">
+                    <p class="descricao"><strong>Shield L293D</strong> — Ponte H baseada no CI L293D que permite o controle de velocidade e direção dos motores DC conectados.</p>
+                </div>
+                <div class="item">
+                    <img src="imagens/motordc.jpg" alt="Motor DC">
+                    <p class="descricao"><strong>Motores DC</strong> — Motores elétricos usados para a movimentação do carrinho, controlados por sinais PWM via ponte H.</p>
+                </div>
+                <div class="item">
+                    <img src="imagens/modulo.jpg" alt="Módulo Bluetooth HC-05">
+                    <p class="descricao"><strong>Módulo Bluetooth HC-05</strong> — Interface serial sem fio que permite o controle do carrinho por meio de um aplicativo no celular.</p>
+                </div>
+                <div class="item">
+                    <img src="imagens/Sensordistancia.jpg" alt="Sensor Ultrassônico">
+                    <p class="descricao"><strong>Sensor Ultrassônico HC-SR04</strong> — Mede a distância até obstáculos utilizando pulsos de som, útil para evitar colisões em modo manual.</p>
+                </div>
+                <div class="item">
+                    <img src="imagens/protoboard.jpg" alt="Protoboard e Jumpers">
+                    <p class="descricao"><strong>Protoboard e Fios Jumpers</strong> — Facilita a montagem de circuitos temporários e conexões entre módulos sem necessidade de solda.</p>
+                </div>
+                <div class="item">
+                    <img src="imagens/suportepilhas.jpg" alt="Bateria">
+                    <p class="descricao"><strong>Bateria (Pack ou Li-Ion)</strong> — Fonte de energia para alimentar todos os componentes eletrônicos do carrinho.</p>
+                </div>
+            </div>
+            <button class="prev" onclick="mudarImagem(-1)">&#10094;</button>
+            <button class="next" onclick="mudarImagem(1)">&#10095;</button>
+        </div>
+    </section>
+
+    <section id="codigo">
+        <h2>Código Fonte</h2>
+
+        <h3>Código do Controle Remoto:</h3>
+        <div class="codigo-bloco">
+<pre>
+#include &lt;HCSR04.h&gt; // INCLUI BIBLIOTECA HCSR04
+#include &lt;AFMotor.h&gt; // INCLUI A BIBLIOTECA DA MOTOR SHIELD
+#include &lt;SoftwareSerial.h&gt; // INCLUI SERIAL DO BLUETOOTH
+SoftwareSerial bluetooth(A1, A0); // RX(TX DO MÓDULO BT), TX(RX DO MÓDULO BT)
+
+#define FORWARD 2 //VALOR DA BIBLIOTECA 1
+#define BACKWARD 1 //VALOR DA BIBLIOTECA 2
+
+// INSTANCIANDO MOTORES
 AF_DCMotor motor1(1);
 AF_DCMotor motor2(2);
 AF_DCMotor motor3(3);
 AF_DCMotor motor4(4);
 
+// INNCIANDO SENSOR ULTRASONICO
+HCSR04 sensorDistancia(A2, A3); //PINO TRIGGER, PINO ECHO
+
+// VARIÁVEL PARA RECEBER COMANDO DO BLUETOOTH
+char comando = 0;
+
+// VARIÁVEL PARA ARMAZENAR DISTANCIA MEDIDA NO SENSOR
+float distancia;
+
+void setup() {
+  bluetooth.begin(9600); //INICIA COMUNICAÇÃO SERIAL DO BLUETOOTH
+  //Serial.begin(9600); //INICIA SERIAL MONITOR
+
+  // Define velocidade dos motores
+  motor1.setSpeed(180);
+  motor2.setSpeed(180);
+  motor3.setSpeed(180);
+  motor4.setSpeed(180);
+}
+
+void loop() {
+  // Lê comando enviado via Bluetooth
+  if (bluetooth.available()) {
+    comando = bluetooth.read();
+  }
+
+  distancia = sensorDistancia.dist();  // Lê distância do obstáculo
+
+  if (comando == 'F' && distancia > 10) {
+    frente();
+  } else if (comando == 'B') {
+    tras();
+  } else if (comando == 'L') {
+    esquerda();
+  } else if (comando == 'R') {
+    direita();
+  } else {
+    parado();
+  }
+}
+
+// Funções de controle dos motores
+void frente() {
+  motor1.run(FORWARD);
+  motor2.run(FORWARD);
+  motor3.run(FORWARD);
+  motor4.run(FORWARD);
+}
+
+void tras() {
+  motor1.run(BACKWARD);
+  motor2.run(BACKWARD);
+  motor3.run(BACKWARD);
+  motor4.run(BACKWARD);
+}
+
+void esquerda() {
+  motor1.run(BACKWARD);
+  motor2.run(BACKWARD);
+  motor3.run(FORWARD);
+  motor4.run(FORWARD);
+}
+
+void direita() {
+  motor1.run(FORWARD);
+  motor2.run(FORWARD);
+  motor3.run(BACKWARD);
+  motor4.run(BACKWARD);
+}
+
+void parado() {
+  motor1.run(RELEASE);
+  motor2.run(RELEASE);
+  motor3.run(RELEASE);
+  motor4.run(RELEASE);
+}
+</pre>
+            <a href="codigos_carrinho.zip" download class="botao-download">Download dos Códigos</a>
+        </div>
+
+        <h3>Código do Seguidor de Linha:</h3>
+        <div class="codigo-bloco">
+<pre>
+#include &lt;AFMotor.h&gt;
+
+// Motores conectados à Shield L293D
+AF_DCMotor motor1(1);
+AF_DCMotor motor2(2);
+AF_DCMotor motor3(3);
+AF_DCMotor motor4(4);
+
+// Sensores de linha
 int s1 = A0;
 int s2 = A1;
 int s3 = A2;
 int s4 = A3;
 
 void setup() {
+  // Define a velocidade dos motores
   motor1.setSpeed(180);
   motor2.setSpeed(180);
   motor3.setSpeed(180);
   motor4.setSpeed(180);
 
+  // Inicializa os motores parados
   motor1.run(RELEASE);
   motor2.run(RELEASE);
   motor3.run(RELEASE);
   motor4.run(RELEASE);
 
+  // Define os pinos dos sensores como entrada
   pinMode(s1, INPUT);
   pinMode(s2, INPUT);
   pinMode(s3, INPUT);
@@ -49,18 +239,23 @@ void setup() {
 }
 
 void loop() {
+  // Lê os valores dos sensores
   int sensor1 = digitalRead(s1);
   int sensor2 = digitalRead(s2);
   int sensor3 = digitalRead(s3);
   int sensor4 = digitalRead(s4);
 
+  // Lógica para seguir a linha preta
   if (sensor1 == 0 && sensor2 == 1 && sensor3 == 1 && sensor4 == 0) {
     frente();
-  } else if (sensor2 == 0 && sensor3 == 1) {
+  } 
+  else if (sensor2 == 0 && sensor3 == 1) {
     esquerda();
-  } else if (sensor2 == 1 && sensor3 == 0) {
+  } 
+  else if (sensor2 == 1 && sensor3 == 0) {
     direita();
-  } else {
+  } 
+  else {
     parado();
   }
 }
@@ -92,109 +287,15 @@ void parado() {
   motor3.run(RELEASE);
   motor4.run(RELEASE);
 }
-    </code></pre>
-    <a href="downloads/seguidor.ino" download class="botao-download">Download - Seguidor de Linha</a>
-  </section>
+</pre>
+            <a href="codigos_carrinho.zip" download class="botao-download">Download dos Códigos</a>
+        </div>
+    </section>
 
-  <section id="codigo">
-    <h2>Controle Remoto via Bluetooth (Modo Manual)</h2>
-    <pre><code>
-#include &lt;HCSR04.h&gt;
-#include &lt;AFMotor.h&gt;
-#include &lt;SoftwareSerial.h&gt;
+    <footer>
+        <p>&copy; 2025 - Projeto Acadêmico</p>
+    </footer>
 
-SoftwareSerial bluetooth(A1, A0);
-
-#define FORWARD 2
-#define BACKWARD 1
-
-AF_DCMotor motor1(1);
-AF_DCMotor motor2(2);
-AF_DCMotor motor3(3);
-AF_DCMotor motor4(4);
-
-HCSR04 sensorDistancia(A2, A3);
-
-char comando = 0;
-float distancia;
-
-void setup() {
-  bluetooth.begin(9600);
-
-  motor1.setSpeed(180);
-  motor2.setSpeed(180);
-  motor3.setSpeed(180);
-  motor4.setSpeed(180);
-
-  motor1.run(RELEASE);
-  motor2.run(RELEASE);
-  motor3.run(RELEASE);
-  motor4.run(RELEASE);
-}
-
-void loop() {
-  while (bluetooth.available()) {
-    comando = bluetooth.read();
-    distancia = sensorDistancia.dist();
-
-    if (comando == 'B') {
-      moverFrente();
-    }
-    else if (comando == 'F' && distancia >= 20) {
-      moverTras();
-    }
-    else if (comando == 'L') {
-      moverEsquerda();
-    }
-    else if (comando == 'R') {
-      moverDireita();
-    }
-    else {
-      ficarParado();
-    }
-  }
-}
-
-void moverFrente() {
-  motor1.run(FORWARD);
-  motor2.run(FORWARD);
-  motor3.run(FORWARD);
-  motor4.run(FORWARD);
-}
-
-void moverTras() {
-  motor1.run(BACKWARD);
-  motor2.run(BACKWARD);
-  motor3.run(BACKWARD);
-  motor4.run(BACKWARD);
-}
-
-void moverDireita() {
-  motor1.run(BACKWARD);
-  motor2.run(BACKWARD);
-  motor3.run(FORWARD);
-  motor4.run(FORWARD);
-}
-
-void moverEsquerda() {
-  motor1.run(FORWARD);
-  motor2.run(FORWARD);
-  motor3.run(BACKWARD);
-  motor4.run(BACKWARD);
-}
-
-void ficarParado() {
-  motor1.run(RELEASE);
-  motor2.run(RELEASE);
-  motor3.run(RELEASE);
-  motor4.run(RELEASE);
-}
-    </code></pre>
-    <a href="downloads/controle_bluetooth.ino" download class="botao-download">Download - Controle Bluetooth</a>
-  </section>
-
-  <footer>
-    <p>&copy; 2025 - Projeto Acadêmico</p>
-  </footer>
+    <script src="script.js"></script>
 </body>
 </html>
