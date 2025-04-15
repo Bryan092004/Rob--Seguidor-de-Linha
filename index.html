@@ -19,9 +19,43 @@
     </header>
 
     <section id="descricao">
+
         <h2>Descrição do Projeto</h2>
-        <p>Este projeto tem como objetivo o desenvolvimento de um carrinho autônomo capaz de seguir trajetos definidos por uma linha no solo utilizando sensores infravermelhos. Além disso, o sistema também foi projetado para permitir controle manual por meio de um aplicativo via Bluetooth, utilizando o celular como controle remoto.</p>
-        <p>Embora ambas as funcionalidades estejam implementadas no sistema, a execução de cada modo ocorre de forma independente. Ou seja, para alternar entre o modo automático (seguimento de linha) e o modo manual (controle por celular), é necessário carregar manualmente o código correspondente no Arduino através de conexão com o computador.</p>
+        <br>
+        <p>Este projeto tem como objetivo o desenvolvimento de um carrinho autônomo capaz de seguir trajetos definidos por uma linha no solo, utilizando sensores infravermelhos. Além disso, o sistema permite o controle manual por meio de um aplicativo via Bluetooth, transformando o celular em um controle remoto.</p>
+
+        <p>Ambas as funcionalidades (modo automático e modo manual) estão implementadas, mas operam de forma independente. Para alternar entre os modos, é necessário carregar manualmente o código correspondente no Arduino, por meio da conexão com o computador.</p>
+        <br>
+        <h3>Objetivos</h3>
+        <br>
+        <ul>
+            <li>Criar um robô carrinho utilizando a placa Arduino como plataforma principal.</li>
+            <li>Aplicar lógica de programação com a linguagem C.</li>
+            <li>Integrar componentes eletrônicos como motores, sensores e módulos de controle.</li>
+            <li>Exercitar o raciocínio lógico e a solução de problemas práticos.</li>
+            <li>Demonstrar, na prática, conceitos básicos de automação e robótica.</li>
+        </ul>
+        <br>
+        <h3>Discussão das Referências</h3>
+        <br>
+        <p>As referências utilizadas durante o projeto foram fundamentais para compreender e aplicar os conhecimentos necessários à criação do robô carrinho com Arduino. A partir delas, foi possível aprender desde os fundamentos da programação em C até o funcionamento de componentes como motores, sensores e a própria placa Arduino.</p>
+        
+        <p>Materiais como manuais, tutoriais e artigos destacaram o Arduino como uma ferramenta acessível e poderosa para iniciantes em robótica. Além dos aspectos técnicos, as fontes consultadas contribuíram para boas práticas de montagem, lógica de controle e resolução de problemas comuns.</p>
+        
+        <p>Essas referências serviram como guias teóricos e práticos ao longo do projeto, tornando o processo de aprendizado mais claro, eficiente e envolvente. Elas foram essenciais tanto para resolver dúvidas quanto para inspirar melhorias no sistema.</p>
+        <br>
+        <h3>Metodologia</h3>
+        <br>
+        <p>O desenvolvimento foi dividido em duas etapas principais: controle remoto via Bluetooth e seguidor de linha.</p>
+
+        <p>Em ambas as versões, utilizou-se a placa Arduino UNO com a shield L293D (AFMotor) para controle de quatro motores DC.</p>
+
+        <p>Na versão Bluetooth, o módulo HC-05 foi responsável por receber comandos do celular. O carrinho reconhece letras específicas ('F', 'B', 'L', 'R') para movimentar-se, e conta com um sensor ultrassônico (HC-SR04) que impede avanços em caso de obstáculos a menos de 10 cm.</p>
+
+        <p>Na versão seguidor de linha, quatro sensores infravermelhos conectados às portas analógicas do Arduino detectam a linha preta sobre fundo branco. O código ajusta a movimentação conforme a posição da linha, permitindo que o robô siga a trajetória com precisão.</p>
+
+        <p>A lógica de controle dos modos foi implementada na IDE do Arduino, utilizando as bibliotecas <code>AFMotor.h</code> e <code>HCSR04.h</code>. Vários testes foram feitos para calibrar velocidade, resposta dos sensores e comportamento dos motores.</p>
+
         <img src="imagens/Robo.jpg" alt="Carrinho Seguidor de Linha">
     </section>
 
@@ -163,100 +197,98 @@ void parado() {
   motor3.run(RELEASE);
   motor4.run(RELEASE);
 }
-
 </pre>
-            <a href="controle_bluetooth.ino" download class="botao-download">Download</a>
+            <a href="codigos_carrinho.zip" download class="botao-download">Download dos Códigos</a>
         </div>
 
         <h3>Código do Seguidor de Linha:</h3>
         <div class="codigo-bloco">
 <pre>
-  #include &lt;AFMotor.h&lt;
+#include &lt;AFMotor.h&gt;
 
-    // Motores conectados à Shield L293D
-    AF_DCMotor motor1(1);
-    AF_DCMotor motor2(2);
-    AF_DCMotor motor3(3);
-    AF_DCMotor motor4(4);
-    
-    // Sensores de linha
-    int s1 = A0;
-    int s2 = A1;
-    int s3 = A2;
-    int s4 = A3;
-    
-    void setup() {
-      // Define a velocidade dos motores
-      motor1.setSpeed(180);
-      motor2.setSpeed(180);
-      motor3.setSpeed(180);
-      motor4.setSpeed(180);
-    
-      // Inicializa os motores parados
-      motor1.run(RELEASE);
-      motor2.run(RELEASE);
-      motor3.run(RELEASE);
-      motor4.run(RELEASE);
-    
-      // Define os pinos dos sensores como entrada
-      pinMode(s1, INPUT);
-      pinMode(s2, INPUT);
-      pinMode(s3, INPUT);
-      pinMode(s4, INPUT);
-    }
-    
-    void loop() {
-      // Lê os valores dos sensores
-      int sensor1 = digitalRead(s1);
-      int sensor2 = digitalRead(s2);
-      int sensor3 = digitalRead(s3);
-      int sensor4 = digitalRead(s4);
-    
-      // Lógica para seguir a linha preta
-      if (sensor1 == 0 && sensor2 == 1 && sensor3 == 1 && sensor4 == 0) {
-        frente();
-      } 
-      else if (sensor2 == 0 && sensor3 == 1) {
-        esquerda();
-      } 
-      else if (sensor2 == 1 && sensor3 == 0) {
-        direita();
-      } 
-      else {
-        parado();
-      }
-    }
-    
-    void frente() {
-      motor1.run(FORWARD);
-      motor2.run(FORWARD);
-      motor3.run(FORWARD);
-      motor4.run(FORWARD);
-    }
-    
-    void esquerda() {
-      motor1.run(BACKWARD);
-      motor2.run(BACKWARD);
-      motor3.run(FORWARD);
-      motor4.run(FORWARD);
-    }
-    
-    void direita() {
-      motor1.run(FORWARD);
-      motor2.run(FORWARD);
-      motor3.run(BACKWARD);
-      motor4.run(BACKWARD);
-    }
-    
-    void parado() {
-      motor1.run(RELEASE);
-      motor2.run(RELEASE);
-      motor3.run(RELEASE);
-      motor4.run(RELEASE);
-    }
-    
+// Motores conectados à Shield L293D
+AF_DCMotor motor1(1);
+AF_DCMotor motor2(2);
+AF_DCMotor motor3(3);
+AF_DCMotor motor4(4);
+
+// Sensores de linha
+int s1 = A0;
+int s2 = A1;
+int s3 = A2;
+int s4 = A3;
+
+void setup() {
+  // Define a velocidade dos motores
+  motor1.setSpeed(180);
+  motor2.setSpeed(180);
+  motor3.setSpeed(180);
+  motor4.setSpeed(180);
+
+  // Inicializa os motores parados
+  motor1.run(RELEASE);
+  motor2.run(RELEASE);
+  motor3.run(RELEASE);
+  motor4.run(RELEASE);
+
+  // Define os pinos dos sensores como entrada
+  pinMode(s1, INPUT);
+  pinMode(s2, INPUT);
+  pinMode(s3, INPUT);
+  pinMode(s4, INPUT);
+}
+
+void loop() {
+  // Lê os valores dos sensores
+  int sensor1 = digitalRead(s1);
+  int sensor2 = digitalRead(s2);
+  int sensor3 = digitalRead(s3);
+  int sensor4 = digitalRead(s4);
+
+  // Lógica para seguir a linha preta
+  if (sensor1 == 0 && sensor2 == 1 && sensor3 == 1 && sensor4 == 0) {
+    frente();
+  } 
+  else if (sensor2 == 0 && sensor3 == 1) {
+    esquerda();
+  } 
+  else if (sensor2 == 1 && sensor3 == 0) {
+    direita();
+  } 
+  else {
+    parado();
+  }
+}
+
+void frente() {
+  motor1.run(FORWARD);
+  motor2.run(FORWARD);
+  motor3.run(FORWARD);
+  motor4.run(FORWARD);
+}
+
+void esquerda() {
+  motor1.run(BACKWARD);
+  motor2.run(BACKWARD);
+  motor3.run(FORWARD);
+  motor4.run(FORWARD);
+}
+
+void direita() {
+  motor1.run(FORWARD);
+  motor2.run(FORWARD);
+  motor3.run(BACKWARD);
+  motor4.run(BACKWARD);
+}
+
+void parado() {
+  motor1.run(RELEASE);
+  motor2.run(RELEASE);
+  motor3.run(RELEASE);
+  motor4.run(RELEASE);
+}
 </pre>
-            <a href="seguidor_linha.ino" download class="botao-download">Download</a>
+            <a href="codigos_carrinho.zip" download class="botao-download">Download dos Códigos</a>
         </div>
     </section>
 
