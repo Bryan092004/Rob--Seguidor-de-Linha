@@ -14,6 +14,7 @@
                 <li><a href="#descricao">Descrição</a></li>
                 <li><a href="#componentes">Componentes</a></li>
                 <li><a href="#codigo">Código</a></li>
+                <li><a href="#colaboradores">Colaboradores</a></li> <!-- Nova aba de colaboradores -->
             </ul>
         </nav>
     </header>
@@ -149,151 +150,117 @@ void loop() {
 
   if (comando == 'F' && distancia > 10) {
     frente();
-  } else if (comando == 'B') {
-    tras();
-  } else if (comando == 'L') {
-    esquerda();
-  } else if (comando == 'R') {
-    direita();
-  } else {
-    parado();
+  } 
+  else if (comando == 'B') {
+    reverso();
   }
-}
-
-// Funções de controle dos motores
-void frente() {
-  motor1.run(FORWARD);
-  motor2.run(FORWARD);
-  motor3.run(FORWARD);
-  motor4.run(FORWARD);
-}
-
-void tras() {
-  motor1.run(BACKWARD);
-  motor2.run(BACKWARD);
-  motor3.run(BACKWARD);
-  motor4.run(BACKWARD);
-}
-
-void esquerda() {
-  motor1.run(BACKWARD);
-  motor2.run(BACKWARD);
-  motor3.run(FORWARD);
-  motor4.run(FORWARD);
-}
-
-void direita() {
-  motor1.run(FORWARD);
-  motor2.run(FORWARD);
-  motor3.run(BACKWARD);
-  motor4.run(BACKWARD);
-}
-
-void parado() {
-  motor1.run(RELEASE);
-  motor2.run(RELEASE);
-  motor3.run(RELEASE);
-  motor4.run(RELEASE);
-}
-</pre>
-            <a href="codigos_carrinho.zip" download class="botao-download">Download dos Códigos</a>
-        </div>
-
-        <h3>Código do Seguidor de Linha:</h3>
-        <div class="codigo-bloco">
-<pre>
-#include &lt;AFMotor.h&gt;
-
-// Motores conectados à Shield L293D
-AF_DCMotor motor1(1);
-AF_DCMotor motor2(2);
-AF_DCMotor motor3(3);
-AF_DCMotor motor4(4);
-
-// Sensores de linha
-int s1 = A0;
-int s2 = A1;
-int s3 = A2;
-int s4 = A3;
-
-void setup() {
-  // Define a velocidade dos motores
-  motor1.setSpeed(180);
-  motor2.setSpeed(180);
-  motor3.setSpeed(180);
-  motor4.setSpeed(180);
-
-  // Inicializa os motores parados
-  motor1.run(RELEASE);
-  motor2.run(RELEASE);
-  motor3.run(RELEASE);
-  motor4.run(RELEASE);
-
-  // Define os pinos dos sensores como entrada
-  pinMode(s1, INPUT);
-  pinMode(s2, INPUT);
-  pinMode(s3, INPUT);
-  pinMode(s4, INPUT);
-}
-
-void loop() {
-  // Lê os valores dos sensores
-  int sensor1 = digitalRead(s1);
-  int sensor2 = digitalRead(s2);
-  int sensor3 = digitalRead(s3);
-  int sensor4 = digitalRead(s4);
-
-  // Lógica para seguir a linha preta
-  if (sensor1 == 0 && sensor2 == 1 && sensor3 == 1 && sensor4 == 0) {
-    frente();
-  } 
-  else if (sensor2 == 0 && sensor3 == 1) {
+  else if (comando == 'L') {
     esquerda();
-  } 
-  else if (sensor2 == 1 && sensor3 == 0) {
+  }
+  else if (comando == 'R') {
     direita();
-  } 
+  }
   else {
-    parado();
+    parar();
   }
 }
 
+// Funções de movimento
 void frente() {
+  motor1.setSpeed(255);
+  motor2.setSpeed(255);
+  motor3.setSpeed(255);
+  motor4.setSpeed(255);
+
   motor1.run(FORWARD);
   motor2.run(FORWARD);
   motor3.run(FORWARD);
   motor4.run(FORWARD);
 }
 
-void esquerda() {
+void reverso() {
+  motor1.setSpeed(255);
+  motor2.setSpeed(255);
+  motor3.setSpeed(255);
+  motor4.setSpeed(255);
+
   motor1.run(BACKWARD);
   motor2.run(BACKWARD);
-  motor3.run(FORWARD);
-  motor4.run(FORWARD);
-}
-
-void direita() {
-  motor1.run(FORWARD);
-  motor2.run(FORWARD);
   motor3.run(BACKWARD);
   motor4.run(BACKWARD);
 }
 
-void parado() {
+void esquerda() {
+  motor1.setSpeed(255);
+  motor2.setSpeed(255);
+  motor3.setSpeed(255);
+  motor4.setSpeed(255);
+
+  motor1.run(BACKWARD);
+  motor2.run(FORWARD);
+  motor3.run(FORWARD);
+  motor4.run(BACKWARD);
+}
+
+void direita() {
+  motor1.setSpeed(255);
+  motor2.setSpeed(255);
+  motor3.setSpeed(255);
+  motor4.setSpeed(255);
+
+  motor1.run(FORWARD);
+  motor2.run(BACKWARD);
+  motor3.run(BACKWARD);
+  motor4.run(FORWARD);
+}
+
+void parar() {
+  motor1.setSpeed(0);
+  motor2.setSpeed(0);
+  motor3.setSpeed(0);
+  motor4.setSpeed(0);
   motor1.run(RELEASE);
   motor2.run(RELEASE);
   motor3.run(RELEASE);
   motor4.run(RELEASE);
 }
+
 </pre>
-            <a href="codigos_carrinho.zip" download class="botao-download">Download dos Códigos</a>
+            <button class="download-btn">Baixar Código do Controle Remoto</button>
         </div>
     </section>
 
+    <section id="colaboradores">
+      <h2>Colaboradores</h2>
+      <div class="colaboradores-container">
+          <div class="colaborador">
+              <img src="imagens/luan.jpg" alt="Luan" class="foto-colaborador">
+              <p>Luan Santinello</p>
+              <a href="https://github.com/Luan-Santinello" target="_blank">GitHub</a>
+          </div>
+          <div class="colaborador">
+              <img src="imagens/eduarda.jpg" alt="Eduarda" class="foto-colaborador">
+              <p>Eduarda Soares</p>
+              <a href="https://github.com/Gr1Duda" target="_blank">GitHub</a>
+          </div>
+          <div class="colaborador">
+              <img src="imagens/joão.jpg" alt="João" class="foto-colaborador">
+              <p>João Silva</p>
+              <a href="https://github.com/Jhonnjust" target="_blank">GitHub</a>
+          </div>
+          <div class="colaborador">
+              <img src="imagens/bryan.jpg" alt="Bryan" class="foto-colaborador">
+              <p>Bryan Duarte</p>
+              <a href="https://github.com/Bryan092004" target="_blank">GitHub</a>
+          </div>
+      </div>
+  </section>
+
     <footer>
-        <p>&copy; 2025 - Projeto Acadêmico</p>
+        <p>&copy; 2025 Projeto Carrinho Seguidor de Linha</p>
     </footer>
 
     <script src="script.js"></script>
 </body>
 </html>
+ 
