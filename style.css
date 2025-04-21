@@ -172,11 +172,64 @@ button:hover {
     background-color: #3ea0ff;
     transform: scale(1.05);
 }
+#colaboradores {
+    padding: 40px 20px;
+    background-color: #f5f5f5;
+}
 
+#colaboradores h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 28px;
+}
 
-  
+.colaboradores-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
 
+.colaborador {
+    background-color: #000;
+    color: white;
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    width: 200px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
+.foto-colaborador {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border: 2px solid white;
+    margin-bottom: 15px;
+}
 
-  
-  
+.colaborador p {
+    margin: 10px 0;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.colaborador a {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 8px 16px;
+    background-color: #3ea0ff;
+    color: hsl(0, 0%, 100%);
+    border-radius: 20px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.colaborador a:hover {
+    background-color: #333;
+    color: #fff;
+}
